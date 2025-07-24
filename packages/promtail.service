@@ -1,0 +1,11 @@
+[Unit]
+Description=Promtail Log Sender
+After=syslog.target network.target auditd.target sshd.target
+
+[Service]
+ExecStart=/opt/packages/promtail/promtail-linux-amd64 -config.file /opt/packages/promtail/config.yml
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target

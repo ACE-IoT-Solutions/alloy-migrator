@@ -1,0 +1,47 @@
+# HELP device_scrape_time_histogram Time taken to scrape given device - histogram
+# TYPE device_scrape_time_histogram histogram
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.005"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.01"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.025"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.05"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.075"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.1"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.25"} 0.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.5"} 241.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="0.75"} 241.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="1.0"} 241.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="2.5"} 241.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="5.0"} 241.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="7.5"} 242.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="10.0"} 242.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="30.0"} 242.0
+device_scrape_time_histogram_bucket{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",le="+Inf"} 242.0
+device_scrape_time_histogram_count{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021"} 242.0
+device_scrape_time_histogram_sum{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021"} 97.93223643302917
+# HELP device_scrape_time_histogram_created Time taken to scrape given device - histogram
+# TYPE device_scrape_time_histogram_created gauge
+device_scrape_time_histogram_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021"} 1.7532897004331238e+09
+# HELP device_scrape_time Time taken to scrape device
+# TYPE device_scrape_time gauge
+device_scrape_time{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021"} 0.3726944923400879
+# HELP device_error_count_total Number of errors per device
+# TYPE device_error_count_total counter
+# HELP failed_point_scrape_total Failed scrape for existing point
+# TYPE failed_point_scrape_total counter
+failed_point_scrape_total{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/minAmpsPerPort"} 1.0
+failed_point_scrape_total{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/stationLocationID"} 1.0
+failed_point_scrape_total{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/maxAmpsPerPort"} 1.0
+failed_point_scrape_total{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/online"} 1.0
+failed_point_scrape_total{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/volts"} 1.0
+failed_point_scrape_total{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/connectorCount"} 1.0
+# HELP failed_point_scrape_created Failed scrape for existing point
+# TYPE failed_point_scrape_created gauge
+failed_point_scrape_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/minAmpsPerPort"} 1.7532979804959404e+09
+failed_point_scrape_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/stationLocationID"} 1.7532979804963849e+09
+failed_point_scrape_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/maxAmpsPerPort"} 1.7532979804967704e+09
+failed_point_scrape_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/online"} 1.7532979804971561e+09
+failed_point_scrape_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/volts"} 1.7532979804975407e+09
+failed_point_scrape_created{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021",point="devices/aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021/connectorCount"} 1.7532979804979181e+09
+# HELP point_count Number of points per device
+# TYPE point_count gauge
+point_count{device="aceiot/cristian_house_0001_test/opconnecthawaii.com/OC6021"} 6.0

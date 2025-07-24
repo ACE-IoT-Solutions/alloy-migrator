@@ -1,0 +1,9 @@
+[Service]
+ExecStart=/opt/packages/prometheus_exporter/node_exporter-1.2.2.linux-amd64/node_exporter --collector.systemd --collector.textfile.directory /opt/packages/prometheus_exporter/scrape_files
+WorkingDirectory=/opt/packages/prometheus_exporter/node_exporter-1.2.2.linux-amd64/
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

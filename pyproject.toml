@@ -1,0 +1,14 @@
+[project]
+name = "alloy-migrator"
+version = "0.1.0"
+description = "Tool to migrate Prometheus node_exporter and Promtail configurations to Grafana Alloy"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pyyaml",
+    "typer",
+    "rich",
+]
+
+[project.scripts]
+alloy-migrator = "alloy_migrator:main"

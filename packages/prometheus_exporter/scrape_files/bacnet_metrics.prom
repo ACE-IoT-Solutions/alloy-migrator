@@ -1,0 +1,42 @@
+# HELP bacnet_score BACnet metric: score
+# TYPE bacnet_score gauge
+bacnet_score{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 70.0
+# HELP bacnet_broadcast_ratio BACnet metric: broadcast_ratio
+# TYPE bacnet_broadcast_ratio gauge
+bacnet_broadcast_ratio{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.0
+# HELP bacnet_local_broadcast_ratio BACnet metric: local_broadcast_ratio
+# TYPE bacnet_local_broadcast_ratio gauge
+bacnet_local_broadcast_ratio{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 0.0
+# HELP bacnet_remote_station_ratio BACnet metric: remote_station_ratio
+# TYPE bacnet_remote_station_ratio gauge
+bacnet_remote_station_ratio{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 0.0
+# HELP bacnet_whois_ratio BACnet metric: whois_ratio
+# TYPE bacnet_whois_ratio gauge
+bacnet_whois_ratio{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.0
+# HELP bacnet_prop_acked_ratio BACnet metric: prop_acked_ratio
+# TYPE bacnet_prop_acked_ratio gauge
+bacnet_prop_acked_ratio{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.0
+# HELP bacnet_props_acked_ratio BACnet metric: props_acked_ratio
+# TYPE bacnet_props_acked_ratio gauge
+bacnet_props_acked_ratio{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.0
+# HELP bacnet_packet_count_total BACnet metric: packet_count
+# TYPE bacnet_packet_count_total counter
+bacnet_packet_count_total{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 2874.0
+# HELP bacnet_packet_count_created BACnet metric: packet_count
+# TYPE bacnet_packet_count_created gauge
+bacnet_packet_count_created{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.7477491779259303e+09
+# HELP bacnet_device_count BACnet metric: device_count
+# TYPE bacnet_device_count gauge
+bacnet_device_count{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 0.0
+# HELP bacnet_message_types_WhoIsRequest_total BACnet metric: message_types/WhoIsRequest
+# TYPE bacnet_message_types_WhoIsRequest_total counter
+bacnet_message_types_WhoIsRequest_total{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 2874.0
+# HELP bacnet_message_types_WhoIsRequest_created BACnet metric: message_types/WhoIsRequest
+# TYPE bacnet_message_types_WhoIsRequest_created gauge
+bacnet_message_types_WhoIsRequest_created{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.7477491779270725e+09
+# HELP bacnet_destination_types_GlobalBroadcast_total BACnet metric: destination_types/GlobalBroadcast
+# TYPE bacnet_destination_types_GlobalBroadcast_total counter
+bacnet_destination_types_GlobalBroadcast_total{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 2874.0
+# HELP bacnet_destination_types_GlobalBroadcast_created BACnet metric: destination_types/GlobalBroadcast
+# TYPE bacnet_destination_types_GlobalBroadcast_created gauge
+bacnet_destination_types_GlobalBroadcast_created{client="aceiot",gateway="cristian-house-0001-test",site="cristian_house_test"} 1.747749177927721e+09

@@ -1,0 +1,111 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/log/positions.yaml # This location needs to be writeable by promtail.
+
+clients:
+  - url: http://100.108.22.98:3100/loki/api/v1/push
+
+scrape_configs:
+ - job_name: system
+   pipeline_stages:
+   static_configs:
+   - targets:
+      - localhost
+     labels:
+      job: varlogs  # A `job` label is fairly standard in prometheus and useful for linking metrics and logs.
+      host: cristian-house-0001-test # A `host` label will help identify logs from this machine vs others
+      __path__: /var/log/**/*.log  # The path matching uses a third party library: https://github.com/bmatcuk/doublestar
+      __path_exclude__: /var/log/installer
+ - job_name: journal
+   journal:
+     max_age: 12h
+     labels:
+       job: systemd-journal
+       host: cristian-house-0001-test
+   relabel_configs:
+     - source_labels: ['__journal__systemd_unit']
+       target_label: 'unit'
+   pipeline_stages:
+     - match:
+        pipeline_name: "hawke_transcript"
+        selector: '{unit="volttron.service"} |~ " hawke-.*.transcript "'
+        action: keep
+        stages:
+          - regex:
+              expression: "(?P<message>{.*})"
+          - json:
+              source: message
+              expressions:
+                ts: ts
+                live: live
+                rtype: rtype
+                mark: mark
+                elapsed_msec: context.elapsed_msec
+          - regex:
+              expression: "^(?P<agent>.*?):(?P<strategy>.*?):(?P<run>.*?)"
+              source: mark
+          - template:
+              source: hawke_transcript
+              template: 'true'
+          - labels:
+              hawke_transcript:
+              ts:
+              hawke_agent: agent
+              hawke_strategy: strategy
+              live:
+              rtype:
+          - metrics:
+              elapsed_msec:
+                type: Histogram
+                description: "histogram of strategy run elapsed times"
+                prefix: hawke_events_
+                source: elapsed_msec
+                buckets: [0.01, 0.05, 0.1, 0.5, 0.8, 1.0, 5.0, 10.0]
+                max_idle_duration: 25h
+              events:
+                type: Counter
+                description: "counter for all events"
+                prefix: hawke_events_
+                config:
+                  action: inc
+                  match_all: true
+              live_events:
+                type: Counter
+                description: "counter for events with live=true"
+                prefix: hawke_events_
+                source: live
+                config:
+                  value: "true"
+                  action: inc
+              total_elapsed:
+                type: Counter
+                description: "total elapsed time"
+                prefix: hawke_events_
+                source: elapsed_msec
+                config:
+                  action: add
+          - output:
+              source: message
+     - match:
+        pipeline_name: "volttron_metrics"
+        selector: '{unit="volttron.service", hawke_transcript!="true"}'
+        action: keep
+        stages:
+          - regex:
+              expression: '\((?P<agent_name>.*?)-.*\) (?P<python_module>.*?) (?P<log_level>INFO|DEBUG|ERROR|WARNING): '
+          - labels:
+              agent_name:
+              log_level:
+          - metrics:
+              logs:
+                type: Counter
+                description: total log lines from volttron
+                prefix: volttron_metrics_
+                config:
+                  action: inc
+                  match_all: true
+          - output:
+              source: output
