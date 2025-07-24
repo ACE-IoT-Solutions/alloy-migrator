@@ -473,7 +473,6 @@ class NodeExporterToAlloyMigrator:
             config_lines.append('')
             config_lines.append('  systemd {')
             config_lines.append('    enable_restarts = true')
-            config_lines.append('    enable_task_metrics = true')
             config_lines.append('  }')
         
         config_lines.append('}')
@@ -592,7 +591,7 @@ def migrate_all(
             
             migrator = PromtailToAlloyMigrator(promtail_yaml)
             alloy_promtail = migrator.migrate()
-            configs.append(("# Promtail Migration", alloy_promtail))
+            configs.append(("// Promtail Migration", alloy_promtail))
             
             console.print("[green]✓[/green] Promtail configuration migrated")
         except Exception as e:
@@ -604,7 +603,7 @@ def migrate_all(
         try:
             migrator = NodeExporterToAlloyMigrator(service_file_path=node_service)
             alloy_node = migrator.migrate()
-            configs.append(("# Node Exporter Migration", alloy_node))
+            configs.append(("// Node Exporter Migration", alloy_node))
             
             console.print("[green]✓[/green] node_exporter configuration migrated")
         except Exception as e:
