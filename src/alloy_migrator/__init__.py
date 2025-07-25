@@ -379,7 +379,18 @@ class PromtailToAlloyMigrator:
                     lines.append(f'{indent_str}}}')
                     lines.append("")  # Empty line between stages
         elif isinstance(value, dict):
-            if value:  # Only create block if dict is not empty
+            # Special cases where dict should be formatted as attribute
+            if key in ['labels', 'external_labels']:
+                if value:
+                    lines.append(f'{indent_str}{key} = {{')
+                    items = []
+                    for k, v in value.items():
+                        items.append(f'{k} = {json.dumps(v)}')
+                    lines.append(f'{indent_str}  {", ".join(items)},')
+                    lines.append(f'{indent_str}}}')
+                else:
+                    lines.append(f'{indent_str}{key} = {{}}')
+            elif value:  # Regular block formatting for non-empty dicts
                 lines.append(f'{indent_str}{key} {{')
                 for k, v in value.items():
                     lines.extend(self._format_config_value(k, v, indent + 2))
@@ -637,7 +648,7 @@ def validate(
     
     try:
         result = subprocess.run(
-            ["alloy", "fmt", "--check", str(config_file)],
+            ["alloy", "validate", str(config_file)],
             capture_output=True,
             text=True
         )
