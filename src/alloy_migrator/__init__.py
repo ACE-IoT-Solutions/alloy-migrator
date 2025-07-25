@@ -152,11 +152,22 @@ class PromtailToAlloyMigrator:
         if 'labels' in journal_config:
             journal_component['config']['labels'] = journal_config['labels']
         
-        # Add relabel configs
+        # Handle relabel configs with separate component
         if 'relabel_configs' in config:
             relabel_rules = self._convert_relabel_configs(config['relabel_configs'])
             if relabel_rules:
-                journal_component['config']['relabel_rules'] = relabel_rules
+                # Create a separate loki.relabel component
+                relabel_component = {
+                    'type': 'loki.relabel',
+                    'id': f'{job_name}_relabel',
+                    'config': {
+                        'forward_to': [forward_to],
+                        '_rules': relabel_rules  # Special marker for rules
+                    }
+                }
+                self.alloy_components.append(relabel_component)
+                # Update journal to forward to relabel component
+                journal_component['config']['forward_to'] = [f'loki.relabel.{job_name}_relabel.receiver']
         
         self.alloy_components.append(journal_component)
         
@@ -351,7 +362,16 @@ class PromtailToAlloyMigrator:
         
         config = component['config']
         for key, value in config.items():
-            lines.extend(self._format_config_value(key, value, indent=2))
+            if key == '_rules':
+                # Special handling for rules - format them as direct rule blocks
+                for rule in value:
+                    lines.append('  rule {')
+                    for k, v in rule.items():
+                        lines.append(f'    {k} = {json.dumps(v)}')
+                    lines.append('  }')
+                    lines.append("")
+            else:
+                lines.extend(self._format_config_value(key, value, indent=2))
         
         lines.append('}')
         return lines
@@ -418,6 +438,15 @@ class PromtailToAlloyMigrator:
                             lines.append(f'{indent_str}    {k} = {json.dumps(v)},')
                         lines.append(f'{indent_str}  }},')
                     lines.append(f'{indent_str}]')
+            elif key == 'forward_to':
+                # Special handling for forward_to - component references should not be quoted
+                refs = []
+                for item in value:
+                    if isinstance(item, str) and (item.startswith('loki.') or item.startswith('prometheus.')):
+                        refs.append(item)
+                    else:
+                        refs.append(json.dumps(item))
+                lines.append(f'{indent_str}{key} = [{", ".join(refs)}]')
             else:
                 lines.append(f'{indent_str}{key} = {json.dumps(value)}')
         elif isinstance(value, str) and (value.startswith('local.') or value.startswith('loki.') or value.startswith('prometheus.')):
